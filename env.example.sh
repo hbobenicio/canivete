@@ -1,0 +1,1 @@
+export CANIVETE_LOG_LEVEL=debug
