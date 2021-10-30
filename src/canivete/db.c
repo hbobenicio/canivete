@@ -41,6 +41,7 @@ int canivete_db_migrate(struct canivete* app)
     static const char* migrations_dir = "db/migrations/";
 
     sqlite3* db = NULL;
+    canivete_log_debug(&app->logger, DB_MIGRATE_LOG_TAG "trying to open database '%s'", app->config.db.filepath.cstr);
     if (sqlite3_open_v2(app->config.db.filepath.cstr, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL) != SQLITE_OK) {
         canivete_log_error(&app->logger, DB_MIGRATE_LOG_TAG "failed to open/create database: %s", sqlite3_errmsg(db));
         goto err;

@@ -154,18 +154,12 @@ static int endpoint_add_cmd(struct canivete* app, const char* program_name, int*
     const char* host_arg = shift_arg(argc, argv);
     const char* port_arg = shift_arg(argc, argv);
 
-    // TODO should we care about migration?
-    // if (canivete_db_migrate(app) != CANIVETE_OK) {
-    //     canivete_log_error(&app->logger, "endpoint: add: failed to add endpoint. host=\"%s\" port=\"%s\"\n", host, port);
-    //     return CANIVETE_ERR_CLI;
-    // }
-
     // TODO improve safe convertion
     const char* host = host_arg;
     int port = atoi(port_arg);
 
     if (canivete_db_endpoints_insert(app, host, port) != CANIVETE_OK) {
-        canivete_log_error(&app->logger, "failed to add new enpoint");
+        canivete_log_error(&app->logger, "failed to add new endpoint");
         return CANIVETE_ERR_CLI;
     }
 

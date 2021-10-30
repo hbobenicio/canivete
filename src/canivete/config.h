@@ -12,6 +12,10 @@ struct canivete_logger;
 #define CANIVETE_CONFIG_SERVER_ADDRESS_HOST_CAPACITY 64
 #endif
 
+#ifndef CANIVETE_CONFIG_XDG_DIR_CAP
+#define CANIVETE_CONFIG_XDG_DIR_CAP 4096
+#endif
+
 struct canivete_config_server_address {
     char host[CANIVETE_CONFIG_SERVER_ADDRESS_HOST_CAPACITY];
     size_t host_len;
@@ -19,7 +23,7 @@ struct canivete_config_server_address {
 };
 
 struct canivete_config_db {
-    struct str_borrow filepath;
+    struct str filepath;
 };
 
 struct canivete_config {
@@ -29,5 +33,6 @@ struct canivete_config {
 };
 
 struct canivete_config canivete_config_from_environment(struct canivete_logger* logger);
+void canivete_config_free(struct canivete_config* config);
 
 #endif

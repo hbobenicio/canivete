@@ -1,6 +1,8 @@
 SRC = \
-	$(wildcard src/canivete/*.c) \
-	$(wildcard src/canivete/utils/*.c)
+	$(wildcard src/canivete/commons/*.c) \
+	$(wildcard src/canivete/utils/*.c) \
+	$(wildcard src/canivete/*.c)
+
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
 BIN = canivete
@@ -16,7 +18,7 @@ LDLIBS  = -lssl -lcrypto -lsqlite3
 CONTAINER_NAME = canivete
 IMG_NAME = canivete/alpine
 
-.PHONY: all release release-static debug distclean clean
+.PHONY: all release release-static debug db-migrate distclean clean
 
 all: debug
 
@@ -53,6 +55,11 @@ $(BIN): $(OBJ)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 -include $(DEP)
+
+# really simple, basic, dummy and temporary migration task
+db-migrate:
+	mkdir -p "$(HOME)/.local/share/canivete"
+	sqlite3 "$(HOME)/.local/share/canivete/canivete.db" < ./db/migrations/0001-bootstrap.sql
 
 distclean: clean
 	rm -f $(BIN) $(BIN_STATIC)

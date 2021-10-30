@@ -8,6 +8,8 @@
 // posix
 #include <errno.h>
 #include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <canivete/error.h>
 #include <stb_ds.h>
@@ -132,4 +134,13 @@ bool select_min_file_len(struct dirent* dir_entry, size_t min_file_len)
 {
     const size_t file_name_len = strlen(dir_entry->d_name);
     return file_name_len >= min_file_len;
+}
+
+int ensure_directory(const char* dir_path)
+{
+    int rc = mkdir(dir_path, 0755);
+    if (rc == 0 || errno == EEXIST) {
+        return 0;
+    }
+    return errno;
 }

@@ -49,6 +49,7 @@ int canivete_init(struct canivete* ctx)
 
 void canivete_free(struct canivete* ctx)
 {
+    canivete_config_free(&ctx->config);
     SSL_CTX_free(ctx->ssl_ctx);
 }
 

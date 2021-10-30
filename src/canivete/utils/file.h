@@ -11,4 +11,6 @@ int file_read_files_from_dir(const char* dir_path, bool (*select)(struct dirent*
 bool select_regular_files(struct dirent* dir_entry);
 bool select_min_file_len(struct dirent* dir_entry, size_t min_file_len);
 
+int ensure_directory(const char* dir_path);
+
 #endif

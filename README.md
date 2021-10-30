@@ -1,6 +1,6 @@
 # canivete
 
-My experimental army-knife CLI utility.
+My personal swiss army knife CLI utility written in C. Just for fun.
 
 ## Dependencies
 
@@ -9,7 +9,9 @@ My experimental army-knife CLI utility.
 #### Tools
 
 - C11/C17 compiler (clang recomended)
+  - Ubuntu 20.04: `clang`
 - make
+  - Ubuntu 20.04: `make`
 - strip (optional, for build releases)
 - find (optional, for make clean/distclean targets)
 - docker (optional, for static linking builds)
